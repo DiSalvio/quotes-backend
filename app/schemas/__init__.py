@@ -1,3 +1,3 @@
-from .quote import Quote, QuoteCreate, QuoteExtractResult
+from .quote import Quote, QuoteCreate, QuoteExtractResult, QuoteBase
 
-__all__ = ["Quote", "QuoteCreate", "QuoteExtractResult"]
+__all__ = ["Quote", "QuoteCreate", "QuoteExtractResult", "QuoteBase"]

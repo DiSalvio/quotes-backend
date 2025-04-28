@@ -3,7 +3,7 @@ from typing import Optional
 
 class QuoteBase(BaseModel):
     text: str
-    author: Optional[str] = Field(default=None)  # Make author optional
+    author: Optional[str] = Field(default=None)
 
 class QuoteCreate(QuoteBase):
     pass

@@ -105,6 +105,22 @@ def create_quote(quote: schemas.QuoteCreate, db: Session = Depends(get_db)):
 def read_quotes(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     return db.query(Quote).offset(skip).limit(limit).all()
 
+@router.put("/quotes/{quote_id}", response_model=schemas.Quote)
+def update_quote(
+    quote_id: int,
+    quote_update: schemas.QuoteBase,
+    db: Session = Depends(get_db)
+):
+    db_quote = db.query(Quote).filter(Quote.id == quote_id).first()
+    if not db_quote:
+        raise HTTPException(status_code=404, detail="Quote not found")
+
+    db_quote.text = quote_update.text
+    db_quote.author = quote_update.author or "Unknown"
+
+    db.commit()
+    db.refresh(db_quote)
+    return db_quote
 
 @router.delete("/quotes/{quote_id}", status_code=204)
 def delete_quote(quote_id: int, db: Session = Depends(get_db)):
