@@ -14,3 +14,6 @@ class Quote(QuoteBase):
     class Config:
         from_attributes = True
 
+class QuoteExtractResult(BaseModel):
+    extracted_text: str
+    extracted_author: Optional[str] = None
